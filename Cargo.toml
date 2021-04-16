@@ -1,0 +1,15 @@
+[package]
+authors = ["Alexander McRae <mcraealex16@gmail.com>"]
+edition = "2018"
+name = "hermes"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cortex-m-rt = "0.6.3"
+panic-semihosting = "0.5.6"
+stm32f3xx-hal = {version = "0.6.1", features = ["stm32f303xc"]}
+cortex-m = "0.7.2"
+usbd-serial = "0.1.1"
+usb-device = "0.2.8"

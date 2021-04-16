@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hermes Groundstation</title>
+</head>
+
+<body>
+  <div id="app" class="max-h-screen grid grid-rows-layout">
+    <header class="flex justify-between p-3  bg-yellow-700 shadow-md">
+      <h1 class="text-xl">Hermes Groundstation</h1>
+      <span>Data: Stale</span>
+    </header>
+    <div class="grid grid-cols-3 grid-rows-3 gap-1 p-1">
+      <div>
+        <canvas id="chart_acceleration"  width="400px" height="200px"></canvas>
+      </div>
+      <div class="bg-green-100 h-full w-full">
+        altitude chart
+        <canvas id="chart_altitude" ></canvas>
+      </div>
+      <div class="bg-yellow-100 h-full w-full">
+        orientation chart
+        <canvas id="chart_orientation" ></canvas>
+      </div>
+      <div class="bg-red-200 h-full w-full">idk</div>
+      <div class="bg-purple-200 h-full w-full">video</div>
+      <div class="bg-blue-200 h-full w-full">
+        idk
+      </div>
+      <div id="command_prompt" class="bg-pink-200 h-full w-full">
+        Cmd prompt
+      </div>
+      <div class="bg-indigo-300 h-full w-full" >
+        <canvas id="3d_orientation" ></canvas>
+      </div>
+      <div id="gps_map" class="h-full"></div>
+    </div>
+  </div>
+  <script type="module" src="/index.js"></script>
+</body>
+
+</html>
