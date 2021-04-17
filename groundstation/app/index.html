@@ -9,35 +9,43 @@
 </head>
 
 <body>
-  <div id="app" class="max-h-screen grid grid-rows-layout">
+  <div id="app" class="max-h-screen grid grid-rows-layout bg-gray-100">
     <header class="flex justify-between p-3  bg-yellow-700 shadow-md">
       <h1 class="text-xl">Hermes Groundstation</h1>
       <span>Data: Stale</span>
     </header>
     <div class="grid grid-cols-3 grid-rows-3 gap-1 p-1">
-      <div>
-        <canvas id="chart_acceleration"  width="400px" height="200px"></canvas>
+      <div class="h-full w-full p-2 shadow bg-gray-50">
+        <canvas id="chart_acceleration" width="400px" height="200px"></canvas>
       </div>
-      <div class="bg-green-100 h-full w-full">
-        altitude chart
-        <canvas id="chart_altitude" ></canvas>
+      <div class="h-full w-full p-2 shadow bg-gray-50">
+        <canvas id="chart_altitude"></canvas>
       </div>
-      <div class="bg-yellow-100 h-full w-full">
-        orientation chart
-        <canvas id="chart_orientation" ></canvas>
+      <div class="h-full w-full p-2 shadow bg-gray-50">
+        <canvas id="chart_orientation"></canvas>
       </div>
-      <div class="bg-red-200 h-full w-full">idk</div>
-      <div class="bg-purple-200 h-full w-full">video</div>
-      <div class="bg-blue-200 h-full w-full">
-        idk
+      <div class="bg-black h-full w-full p-2 shadow">
+        <h4 class="text-green-400 text-center">Console</h4>
+        <div id="command_prompt" class="overflow-auto text-green-300">
+          <div id="command_prompt_output"></div>
+          <div id="command_prompt_input_line" class="flex">
+            <span class="mr-1">> </span>
+            <input type="text" name="input" id="command_prompt_input" autofocus autocomplete="off"
+              placeholder="Type your command here" style="outline: none; border-image-width: 0;"
+              class="w-full border-0 overflow-x-auto bg-black text-green-500 p-0">
+          </div>
+        </div>
       </div>
-      <div id="command_prompt" class="bg-pink-200 h-full w-full">
-        Cmd prompt
+      <div class="bg-indigo-300 h-full w-full shadow">
+        <img id="compass" src="./compass.svg" alt="" class="absolute filter invert w-24 ml-4">
+        <canvas id="3d_orientation" class="w-8 h-8">
+        </canvas>
       </div>
-      <div class="bg-indigo-300 h-full w-full" >
-        <canvas id="3d_orientation" ></canvas>
+      <div id="gps_map" class="h-full shadow"></div>
+      <div class="bg-gray-50 h-full w-full shadow">
+        <video id="drone_camera" src=""></video>
       </div>
-      <div id="gps_map" class="h-full"></div>
+
     </div>
   </div>
   <script type="module" src="/index.js"></script>

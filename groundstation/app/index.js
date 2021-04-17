@@ -1,8 +1,15 @@
 import './index.css';
 import { webSocket } from 'rxjs/webSocket';
 import { BehaviorSubject } from 'rxjs';
+
 import {subscribe as chart_accel_sub} from './src/charts/acceleration';
+import {subscribe as chart_orientation_sub} from './src/charts/orientation';
+import {subscribe as chart_altitude_sub} from './src/charts/altitude';
 import {subscribe as threejs_sub} from './src/3d_orientation';
+
+import {} from './src/command_prompt';
+import {} from './src/gps_map';
+import {} from './src/camera.js';
 
 const time_interval = 80;
 const data = [];
@@ -28,4 +35,6 @@ sub.subscribe({
 });
 
 chart_accel_sub(current_data_sub);
+chart_orientation_sub(current_data_sub);
+chart_altitude_sub(current_data_sub);
 threejs_sub(current_data_sub);
