@@ -2,7 +2,7 @@
 
 A drone and flight controller.
 
-[The blog](https://mcraealex.github.io/hermes/)
+[The blog](https://mcraealex.github.io/hermes/blog)
 
 ## Ground station
 
