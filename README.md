@@ -2,6 +2,8 @@
 
 A drone and flight controller.
 
+[The blog](https://mcraealex.github.io/hermes/)
+
 ## Ground station
 
 This shows realtime updates from the drone.
