@@ -8,6 +8,7 @@ use cortex_m::{asm, singleton};
 use cortex_m_rt::entry;
 use stm32f3xx_hal::{pac, prelude::*, serial::Serial};
 
+
 #[entry]
 fn main() -> ! {
     let dp = pac::Peripherals::take().unwrap();
@@ -19,12 +20,8 @@ fn main() -> ! {
     let mut gpioa = dp.GPIOA.split(&mut rcc.ahb);
 
     let pins = (
-        gpioa
-            .pa9
-            .into_af7(&mut gpioa.moder, &mut gpioa.afrh),
-        gpioa
-            .pa10
-            .into_af7(&mut gpioa.moder, &mut gpioa.afrh),
+        gpioa.pa9.into_af7(&mut gpioa.moder, &mut gpioa.afrh),
+        gpioa.pa10.into_af7(&mut gpioa.moder, &mut gpioa.afrh),
     );
     let serial = Serial::usart1(dp.USART1, pins, 9600.bps(), clocks, &mut rcc.apb2);
     let (tx, rx) = serial.split();
@@ -39,7 +36,6 @@ fn main() -> ! {
 
     // Basically we reclaim the stuff here as its a blocking call
     let (tx_buf, tx_channel, tx) = sending.wait();
-
 
     loop {
         asm::wfi();
