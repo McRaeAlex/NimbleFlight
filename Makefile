@@ -1,15 +1,20 @@
-DEFAULT=build
 
 .PHONY: debug build release flash
-
-debug:
-	cargo run
 
 build:
 	cargo build
 
+debug:
+	cargo run
+
 release:
 	cargo build --release
 
+format:
+	cargo fmt
+
+openocd:
+	openocd -f interface/stlink-v2-1.cfg -f target/stm32f3x.cfg
+
 flash:
-	echo 'not implemented'
+	openocd -f interface/stlink-v2-1.cfg -f target/stm32f3x.cfg -f ./scripts/flash.cfg

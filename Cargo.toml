@@ -9,7 +9,7 @@ version = "0.1.0"
 [dependencies]
 cortex-m-rt = "0.6.3"
 panic-semihosting = "0.5.6"
-stm32f3xx-hal = {version = "0.6.1", features = ["stm32f303xc"]}
+stm32f3xx-hal = {version = "0.6.1", features = ["stm32f303xc", "stm32-usbd"]}
 cortex-m = "0.7.2"
 usbd-serial = "0.1.1"
 usb-device = "0.2.8"
