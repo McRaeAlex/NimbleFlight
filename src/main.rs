@@ -7,24 +7,21 @@ extern crate stm32f3xx_hal as hal;
 
 mod l3gd20;
 
-use cortex_m::asm::{self, delay};
+use arrayvec::ArrayString;
+use cortex_m::asm::delay;
 use cortex_m_rt::entry;
-use hal::{
-    gpio::{Output, PushPull},
-    pac::SPI1,
-    serial::Serial,
-};
+use hal::serial::Serial;
+use hal::spi::Spi;
 use hal::{pac, prelude::*};
-use hal::{
-    pac::usart1::isr::REACK_R,
-    spi::{Mode, Phase, Polarity, Spi},
-};
 use l3gd20::Registers;
 
-use core::{convert::Infallible, fmt::Write};
+use core::{cell::RefCell, fmt::Write};
+
+const LOG_SIZE: usize = 255;
 
 #[entry]
 fn main() -> ! {
+    let mut log_buf = [0; LOG_SIZE];
     // Get the peripherals
     let dp = pac::Peripherals::take().unwrap();
 
@@ -35,6 +32,7 @@ fn main() -> ! {
 
     let mut gpioa = dp.GPIOA.split(&mut rcc.ahb);
     let mut gpioc = dp.GPIOC.split(&mut rcc.ahb);
+    let mut gpioe = dp.GPIOE.split(&mut rcc.ahb);
 
     // UART INIT
     // ---------
@@ -57,11 +55,11 @@ fn main() -> ! {
         &mut rcc.apb2,
     );
 
-    let (mut tx, mut _rx) = serial.split();
+    let (tx, _rx) = serial.split();
 
     let dma1 = dp.DMA1.split(&mut rcc.ahb);
 
-    let (mut tx_chan, mut rx_chan) = (dma1.ch4, dma1.ch5);
+    let (tx_chan, _rx_chan) = (dma1.ch4, dma1.ch5);
 
     let sending = tx.write_all("HELLO WORLD! IT WORKS!".as_bytes(), tx_chan);
 
@@ -69,86 +67,49 @@ fn main() -> ! {
 
     // Onboard sensor init
     // -------------------
-    let mut cs = gpioa
-        .pa4
-        .into_push_pull_output(&mut gpioa.moder, &mut gpioa.otyper);
+    let mut cs = gpioe
+        .pe3
+        .into_push_pull_output(&mut gpioe.moder, &mut gpioe.otyper);
+    cs.set_high().ok();
     let sclk = gpioa.pa5.into_af5(&mut gpioa.moder, &mut gpioa.afrl);
     let miso = gpioa.pa6.into_af5(&mut gpioa.moder, &mut gpioa.afrl);
     let mosi = gpioa.pa7.into_af5(&mut gpioa.moder, &mut gpioa.afrl);
 
-    let spi_mode = Mode {
-        polarity: Polarity::IdleLow,
-        phase: Phase::CaptureOnFirstTransition,
+    // Set up the gyro
+    let mut gyro = l3gd20::L3gd20 {
+        spi: Spi::spi1(
+            dp.SPI1,
+            (sclk, miso, mosi),
+            l3gd20::MODE,
+            1.mhz(),
+            clocks,
+            &mut rcc.apb2,
+        ),
+        cs: cs,
     };
 
-    let mut spi = Spi::spi1(
-        dp.SPI1,
-        (sclk, miso, mosi),
-        spi_mode,
-        10.mhz(),
-        clocks,
-        &mut rcc.apb2,
-    );
+    gyro.register_write(Registers::CTRL_REG1, 0b00_00_1_111); // Turns it on
 
-    // TODO: probably want to setup the values we send
-    let mut msg_sending = [
-        Registers::CTRL_REG1 as u8,
-        0x0f, // turn on the gyroscope and enable all 3 axis and set data rate
-        Registers::CTRL_REG4 as u8,
-        0b1000_0000, // Turn on the blockdata update, we set the byte ording to little endian,
-    ];
-    let _msg_recieved = spi.transfer(&mut msg_sending).unwrap();
+    let _a = gyro.who_am_i();
 
-    let buf = "gyro_ret".as_bytes();
     loop {
-        let val = read_accel_values(&mut spi, &mut cs).unwrap();
+        let (x, y, z) = gyro.values();
+        {
+        update_log_buf(&mut log_buf, x, y, z);
+        }
+        // Extremely important: MUST not change this to be non_blocking
+        {
+        let (_, tx_chan2, tx2) = tx.write_all( &mut log_buf, tx_chan).wait();
 
-        let (_, tx_chan2, tx2) = tx.write_all(buf, tx_chan).wait();
+        delay(1000);
         tx = tx2;
-        tx_chan = tx_chan2;
+        tx_chan = tx_chan2; }
     }
 }
 
-use hal::gpio::gpioa::{PA4, PA5, PA6, PA7};
-use hal::gpio::AF5;
-fn read_accel_values(
-    spi: &mut Spi<SPI1, (PA5<AF5>, PA6<AF5>, PA7<AF5>), u8>,
-    cs: &mut PA4<Output<PushPull>>,
-) -> Result<(i16, i16, i16), Infallible> {
-    cs.set_low().ok();
-    // Check if new data is avaliable
-    loop {
-        let mut buf = [Registers::STATUS_REG as u8, 0];
-        let reply = spi.transfer(&mut buf).unwrap();
+fn update_log_buf(log_buf: &mut [u8; LOG_SIZE], x: i16, y: i16, z: i16) {
+    let mut log = ArrayString::<LOG_SIZE>::new(); // This is to get the core::fmt::Write trait
+    write!(&mut log, "gyro: {{ x: {}, y: {}, z: {} }}\n", x, y, z).expect("Failed to format");
 
-        if reply[1] & 0b0000_0100 != 0 {
-            // This means there is new data
-            break;
-        }
-
-        // if we check the 7th bit of the status register we can check the data vs read rate to see if we are missing values
-    }
-
-    let mut commands = [
-        // This should read out the values
-        Registers::OUT_X_L as u8,
-        Registers::OUT_X_H as u8,
-        Registers::OUT_Y_L as u8,
-        Registers::OUT_Y_H as u8,
-        Registers::OUT_Z_L as u8,
-        Registers::OUT_Z_H as u8,
-        0x00,
-    ];
-
-    let reply = spi.transfer(&mut commands).unwrap();
-
-    cs.set_high().ok();
-
-    assert!(reply.len() == 7);
-
-    let x: i16 = i16::from_le_bytes([reply[1], reply[2]]);
-    let y: i16 = i16::from_le_bytes([reply[3], reply[4]]);
-    let z: i16 = i16::from_le_bytes([reply[5], reply[6]]);
-
-    Ok((x, y, z))
+    log_buf[..log.len()].copy_from_slice(log.as_bytes()); // They must be the same size so we do this
 }
