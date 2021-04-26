@@ -12,3 +12,4 @@ panic-semihosting = "0.5.6"
 stm32f3xx-hal = {version = "0.6.1", features = ["stm32f303xc", "stm32-usbd"]}
 cortex-m = "0.7.2"
 arrayvec = {version = "0.7.0", default-features = false, features = ["serde"]}
+log = "0.4.14"

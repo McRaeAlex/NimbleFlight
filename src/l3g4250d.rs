@@ -109,16 +109,16 @@ impl L3gd20 {
         data
     }
 
-    pub fn register_write_many<'w>(&mut self, buf: &'w mut [u8]) {
-        assert!(buf.len() > 1);
+    // pub fn register_write_many<'w>(&mut self, buf: &'w mut [u8]) {
+    //     assert!(buf.len() > 1);
 
-        buf[0] = read(multi(buf[0].into()));
-        self.cs.set_low().ok();
+    //     buf[0] = read(multi(buf[0].into()));
+    //     self.cs.set_low().ok();
 
-        let data = self.spi.transfer(buf).unwrap();
+    //     let data = self.spi.transfer(buf).unwrap();
 
-        self.cs.set_high().ok();
-    }
+    //     self.cs.set_high().ok();
+    // }
 
 
     pub fn values(&mut self) -> (i16, i16, i16) {
