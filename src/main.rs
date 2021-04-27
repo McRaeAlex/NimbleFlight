@@ -71,7 +71,7 @@ fn main() -> ! {
     let mosi = gpioa.pa7.into_af5(&mut gpioa.moder, &mut gpioa.afrl);
 
     // Set up the gyro
-    let mut gyro = l3g4250d::L3gd20 {
+    let mut gyro = l3g4250d::I3g4250d {
         spi: Spi::spi1(
             dp.SPI1,
             (sclk, miso, mosi),
@@ -87,17 +87,19 @@ fn main() -> ! {
     let sda = gpiob.pb6.into_af4(&mut gpiob.moder, &mut gpiob.afrl);
 
     let i2c = I2c::new(dp.I2C1, (sda, scl), 50.khz(), clocks, &mut rcc.apb1);
-    let mut accelerometer = Lsm303agr::new(i2c);
+    let mut compass = Lsm303agr::new(i2c);
+    compass.turn_on();
 
     gyro.register_write(Registers::CTRL_REG1, 0b00_00_1_111); // Turns it on
 
     let _a = gyro.who_am_i();
-    let _b = accelerometer.who_am_i();
+    let _b = compass.who_am_i();
 
     loop {
         let (x, y, z) = gyro.values();
+        let (ax, ay, az) = compass.values();
 
-        logger.log(logger::Values { x: x, y: y, z: z });
+        logger.log(logger::Values { x: x, y: y, z: z, ax, ay, az });
 
         delay(1000);
     }

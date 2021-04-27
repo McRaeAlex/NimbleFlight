@@ -1,4 +1,4 @@
-use cortex_m::prelude::_embedded_hal_blocking_i2c_Read;
+use cortex_m::prelude::*;
 use hal::{
     gpio::{
         gpiob::{PB6, PB7},
@@ -7,6 +7,9 @@ use hal::{
     i2c::I2c,
     pac::I2C1,
 };
+
+const ACCELEROMETER_ADDR: u8 = 0x19;
+const MAGOMETER_ADDR: u8 = 0x1E;
 
 pub struct Lsm303agr {
     bus: I2c<I2C1, (PB6<AF4>, PB7<AF4>)>,
@@ -19,15 +22,36 @@ impl Lsm303agr {
 
     pub fn who_am_i(&mut self) -> (u8, u8) {
         let mut buffer = [0];
-        self.bus.read(Registers::WHO_AM_I_A as u8, &mut buffer).unwrap();
+        self.bus
+            .write_read(
+                ACCELEROMETER_ADDR,
+                &[Registers::WHO_AM_I_A as u8],
+                &mut buffer,
+            )
+            .unwrap();
         let mut buffer2 = [0];
-        self.bus.read(Registers::WHO_AM_I_M as u8, &mut buffer2).unwrap();
+        self.bus
+            .write_read(MAGOMETER_ADDR, &[Registers::WHO_AM_I_M as u8], &mut buffer2)
+            .unwrap();
         (buffer[0], buffer2[0])
     }
 
-    pub fn values(&mut self) -> () {
+    pub fn turn_on(&mut self) {
+        self.bus.write(ACCELEROMETER_ADDR, &[Registers::CTRL_REG1_A as u8, 0b0100_0_111]).unwrap(); // This turns it on // This turns it on
+    }
 
-        ()
+    pub fn values(&mut self) -> (i16, i16, i16) {
+        let mut buffer_a = [0; 6];
+        let register_a = (Registers::OUT_X_L_A as u8) | 0b1000_0000; // this makes it a read command
+        self.bus
+            .write_read(ACCELEROMETER_ADDR,
+                 &[register_a], &mut buffer_a)
+            .unwrap();
+        
+        let ax = i16::from_le_bytes([buffer_a[0], buffer_a[1]]);
+        let ay = i16::from_le_bytes([buffer_a[2], buffer_a[3]]);
+        let az = i16::from_le_bytes([buffer_a[4], buffer_a[5]]);
+        (ax, ay, az)
     }
 }
 

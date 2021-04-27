@@ -64,12 +64,12 @@ pub enum Registers {
     INT1_DURATION = 0x38,
 }
 
-pub struct L3gd20 {
+pub struct I3g4250d {
     pub spi: Spi<SPI1, (PA5<AF5>, PA6<AF5>, PA7<AF5>), u8>,
     pub cs: PE3<Output<PushPull>>,
 }
 
-impl L3gd20 {
+impl I3g4250d {
     pub fn who_am_i(&mut self) -> u8 {
         self.register_read(Registers::WHO_AM_I)
     }
