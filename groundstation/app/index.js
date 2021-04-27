@@ -3,15 +3,15 @@ import { webSocket } from 'rxjs/webSocket';
 import { BehaviorSubject } from 'rxjs';
 
 import {subscribe as chart_accel_sub} from './src/charts/acceleration';
-import {subscribe as chart_orientation_sub} from './src/charts/orientation';
-import {subscribe as chart_altitude_sub} from './src/charts/altitude';
+import {subscribe as chart_magnetometer_sub} from './src/charts/magnetometer';
+import {subscribe as chart_gyro_sub} from './src/charts/gyroscope';
 import {subscribe as threejs_sub} from './src/3d_orientation';
 
 import {} from './src/command_prompt';
 import {} from './src/gps_map';
 import {} from './src/camera.js';
 
-const time_interval = 80;
+const time_interval = 180;
 const data = [];
 const current_data_sub = new BehaviorSubject([]);
 // We can also have a timeslice data sub which will return a array of data between two times
@@ -30,11 +30,13 @@ sub.subscribe({
     const curr_data = data.slice(start_index, data.length);
 
     // Update the subscription
-    current_data.next(curr_data);
+    current_data_sub.next(curr_data);
   }
 });
 
 chart_accel_sub(current_data_sub);
-chart_orientation_sub(current_data_sub);
-chart_altitude_sub(current_data_sub);
-threejs_sub(current_data_sub);
+chart_gyro_sub(current_data_sub);
+chart_magnetometer_sub(current_data_sub);
+// chart_orientation_sub(current_data_sub);
+// chart_altitude_sub(current_data_sub);
+// threejs_sub(current_data_sub);

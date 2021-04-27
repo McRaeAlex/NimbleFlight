@@ -115,6 +115,6 @@ fn main() -> ! {
             mz,
         });
 
-        delay.delay_ms(100_u32);
+        delay.delay_ms(10_u32);
     }
 }

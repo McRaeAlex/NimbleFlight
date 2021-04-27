@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto';
 const options = {
     responsive: true,
     // animations should be off....
-    animation: true, // unfortunately, there seems to be a bug with chart.js when animation is off it throws errors
+    animations: true, // unfortunately, there seems to be a bug with chart.js when animation is off it throws errors
     plugins: {
         legend: {
             position: 'top',
@@ -19,8 +19,11 @@ const options = {
             title: {
                 text: 'Acceleration (m/s/s)',
                 display: true,
-            }
-        }, x: {
+            },
+            min: -40000,
+            max: 40000,
+        },
+        x: {
             display: true,
             title: {
                 text: 'Time',

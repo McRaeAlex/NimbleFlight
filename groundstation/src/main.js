@@ -3,12 +3,17 @@ const express = require('express');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const SerialPort = require('serialport');
+const ReadLine = require('@serialport/parser-readline');
 const { static } = require('express');
 
 // Config
 const port = 3001;
 
 // Setup USB
+const serial_port = new SerialPort('/dev/ttyACM0', {
+    baudRate: 9600,
+}).pipe(new ReadLine({}));
 
 // Setup the server
 const app = express();
@@ -31,6 +36,32 @@ server.on('upgrade', (request, socket, head) => {
 
 // Start the server
 server.listen(port);
+
+serial_port.on('data', (data) => {
+    console.info('Data:', data);
+    const dat = data.split(' ');
+    const entry = {
+        time: dat[0],
+        gyro: {
+           x: dat[1],
+           y: dat[2],
+           z: dat[3], 
+        },
+        acceleration: {
+            x: dat[4],
+            y: dat[5],
+            z: dat[6],
+        },
+        magnetometer: {
+            x: dat[7],
+            y: dat[8],
+            z: dat[9],
+        },
+    };
+    wss.clients.forEach((ws) => {
+        ws.send(JSON.stringify(entry));
+    })
+});
 
 // setInterval(() => {
 //     const time = Date.now();
