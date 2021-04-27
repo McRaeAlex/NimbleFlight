@@ -5,6 +5,7 @@ use hal::{pac::USART1, prelude::_embedded_hal_serial_Write};
 
 pub struct Logger {
     tx: Tx<USART1>,
+    packet_num: u64,
 }
 
 // TODO: verify that these are true. Though we are single threaded... but Rust doesn't know that
@@ -19,20 +20,35 @@ pub struct Values {
     pub ax: i16,
     pub ay: i16,
     pub az: i16,
+    pub mx: i16,
+    pub my: i16,
+    pub mz: i16,
 }
 
 impl Logger {
     pub fn init(tx: Tx<USART1>) -> Self {
-        let logger = Logger { tx: tx };
+        let logger = Logger { tx: tx, packet_num: 0, };
         logger
     }
 
     pub fn log(&mut self, record: Values) {
+        let pkt_num = self.packet_num;
         writeln!(
             self,
-            "{} {} {} {} {} {}",
-            record.x, record.y, record.z, record.ax, record.ay, record.az
-        ).ok();
+            "{} {} {} {} {} {} {} {} {} {}",
+            pkt_num,
+            record.x,
+            record.y,
+            record.z,
+            record.ax,
+            record.ay,
+            record.az,
+            record.mx,
+            record.my,
+            record.mz
+        )
+        .ok();
+        self.packet_num += 1;
     }
 }
 

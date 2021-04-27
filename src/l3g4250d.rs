@@ -1,11 +1,11 @@
+use cortex_m::prelude::*;
+use hal::gpio::gpioa::{PA5, PA6, PA7};
+use hal::gpio::gpioe::PE3;
 use hal::gpio::PushPull;
 use hal::gpio::{Output, AF5};
 use hal::pac::SPI1;
-use hal::spi::Spi;
-use hal::gpio::gpioa::{PA5, PA6, PA7};
-use hal::gpio::gpioe::{PE3};
-use cortex_m::prelude::*;
 use hal::prelude::_embedded_hal_digital_OutputPin;
+use hal::spi::Spi;
 
 const READ_BIT: u8 = 1 << 7;
 const WRITE_BIT: u8 = !(1 << 7); // Set all bits so we can and it
@@ -29,8 +29,8 @@ fn single(reg: u8) -> u8 {
 }
 
 pub const MODE: hal::spi::Mode = hal::spi::Mode {
-   polarity: hal::spi::Polarity::IdleHigh,
-   phase: hal::spi::Phase::CaptureOnSecondTransition,
+    polarity: hal::spi::Polarity::IdleHigh,
+    phase: hal::spi::Phase::CaptureOnSecondTransition,
 };
 
 #[allow(non_camel_case_types, dead_code)]
@@ -119,7 +119,6 @@ impl I3g4250d {
 
     //     self.cs.set_high().ok();
     // }
-
 
     pub fn values(&mut self) -> (i16, i16, i16) {
         let mut buf = [Registers::OUT_X_L as u8, 0, 0, 0, 0, 0, 0];

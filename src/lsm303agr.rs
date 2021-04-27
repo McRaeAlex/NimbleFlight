@@ -9,7 +9,7 @@ use hal::{
 };
 
 const ACCELEROMETER_ADDR: u8 = 0x19;
-const MAGOMETER_ADDR: u8 = 0x1E;
+const MAGNETOMETER_ADDR: u8 = 0x1E;
 
 pub struct Lsm303agr {
     bus: I2c<I2C1, (PB6<AF4>, PB7<AF4>)>,
@@ -31,23 +31,50 @@ impl Lsm303agr {
             .unwrap();
         let mut buffer2 = [0];
         self.bus
-            .write_read(MAGOMETER_ADDR, &[Registers::WHO_AM_I_M as u8], &mut buffer2)
+            .write_read(
+                MAGNETOMETER_ADDR,
+                &[Registers::WHO_AM_I_M as u8],
+                &mut buffer2,
+            )
             .unwrap();
         (buffer[0], buffer2[0])
     }
 
     pub fn turn_on(&mut self) {
-        self.bus.write(ACCELEROMETER_ADDR, &[Registers::CTRL_REG1_A as u8, 0b0100_0_111]).unwrap(); // This turns it on // This turns it on
+        self.bus
+            .write(
+                ACCELEROMETER_ADDR,
+                &[Registers::CTRL_REG1_A as u8, 0b0100_0_111],
+            )
+            .unwrap(); // This turns it on // This turns it on
+        self.bus
+            .write(
+                MAGNETOMETER_ADDR,
+                &[Registers::CFG_REG_A_M as u8, 0b0_0_0_0_10_00],
+            )
+            .unwrap(); // Turns on the device and makes it poll at 50hz
+    }
+
+    pub fn magnetometer_values(&mut self) -> (i16, i16, i16) {
+        let mut buffer = [0; 6];
+        let register = Registers::OUTX_L_REG_M as u8 | 0b1000_0000;
+        self.bus
+            .write_read(MAGNETOMETER_ADDR, &[register], &mut buffer)
+            .unwrap();
+
+        let mx = i16::from_le_bytes([buffer[0], buffer[1]]);
+        let my = i16::from_le_bytes([buffer[2], buffer[3]]);
+        let mz = i16::from_le_bytes([buffer[4], buffer[5]]);
+        (mx, my, mz)
     }
 
     pub fn values(&mut self) -> (i16, i16, i16) {
         let mut buffer_a = [0; 6];
         let register_a = (Registers::OUT_X_L_A as u8) | 0b1000_0000; // this makes it a read command
         self.bus
-            .write_read(ACCELEROMETER_ADDR,
-                 &[register_a], &mut buffer_a)
+            .write_read(ACCELEROMETER_ADDR, &[register_a], &mut buffer_a)
             .unwrap();
-        
+
         let ax = i16::from_le_bytes([buffer_a[0], buffer_a[1]]);
         let ay = i16::from_le_bytes([buffer_a[2], buffer_a[3]]);
         let az = i16::from_le_bytes([buffer_a[4], buffer_a[5]]);

@@ -7,14 +7,14 @@ extern crate stm32f3xx_hal as hal;
 // #[macro_use] extern crate log;
 
 mod l3g4250d;
-mod lsm303agr;
 mod logger;
+mod lsm303agr;
 
-use cortex_m::asm::delay;
 use cortex_m_rt::entry;
 use hal::i2c::I2c;
 use hal::serial::Serial;
 use hal::spi::Spi;
+use hal::delay::Delay;
 use hal::{pac, prelude::*};
 use l3g4250d::Registers;
 use logger::Logger;
@@ -24,6 +24,7 @@ use lsm303agr::Lsm303agr;
 fn main() -> ! {
     // Get the peripherals
     let dp = pac::Peripherals::take().unwrap();
+    let cp = cortex_m::peripheral::Peripherals::take().expect("Failed to take cortex peripherals");
 
     let mut flash = dp.FLASH.constrain();
 
@@ -43,6 +44,8 @@ fn main() -> ! {
         .sysclk(48.mhz())
         .pclk1(24.mhz())
         .freeze(&mut flash.acr);
+    
+    let mut delay = Delay::new(cp.SYST, clocks);
 
     // Define the pins
     let tx_pin = gpioc.pc4.into_af7(&mut gpioc.moder, &mut gpioc.afrl);
@@ -98,9 +101,20 @@ fn main() -> ! {
     loop {
         let (x, y, z) = gyro.values();
         let (ax, ay, az) = compass.values();
+        let (mx, my, mz) = compass.magnetometer_values();
 
-        logger.log(logger::Values { x: x, y: y, z: z, ax, ay, az });
+        logger.log(logger::Values {
+            x,
+            y,
+            z,
+            ax,
+            ay,
+            az,
+            mx,
+            my,
+            mz,
+        });
 
-        delay(1000);
+        delay.delay_ms(100_u32);
     }
 }
