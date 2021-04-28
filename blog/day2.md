@@ -42,5 +42,5 @@ This part of the project took me 6 days to complete, of which I spent about an h
 
 ## Scratch notes
 
-<iframe src="./resources/day2.pdf" width="100%">
+<iframe src="./resources/day2.pdf" width="100%" height="800px">
 </iframe>
