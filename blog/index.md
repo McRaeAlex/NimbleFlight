@@ -6,7 +6,9 @@ Each "day" I work on the project I will create a blog entry about it. A day in t
 
 ## Blog Entries
 
-[day0 - Inital groundstation setup and design](./day0)
+[day0 - Inital groundstation setup and design](./day0)\
+[day1 - Outputing data over the USB](./day1)\
+[day2 - Getting the sensor data and hooking it up to the groundstation]\
 
 ## The stack
 
