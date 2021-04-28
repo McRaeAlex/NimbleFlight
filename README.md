@@ -14,7 +14,10 @@ This shows realtime updates from the drone.
 ## Stack
 
 Flight Controller Code: Rust
+
 Groundstation: Node + TypeScript
+
+Notes: Rocketbook
 
 ## MVP
 

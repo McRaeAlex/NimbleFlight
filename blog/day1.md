@@ -24,5 +24,7 @@ So it turns out, that hack I wrote about isn't a hack at all. It turns out USB i
 
 The new code works as I expect and it this entire journey only took 1 day. Now I can move on to getting the on board sensors to work and log the values.
 
-
+```
+insert code for the logging
+```
 
