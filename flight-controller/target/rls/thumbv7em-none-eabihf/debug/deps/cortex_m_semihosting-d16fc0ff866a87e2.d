@@ -1,0 +1,10 @@
+/home/mcrae/Code/hermes/target/rls/thumbv7em-none-eabihf/debug/deps/cortex_m_semihosting-d16fc0ff866a87e2.rmeta: /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/lib.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/macros.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/debug.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/export.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/hio.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/nr.rs
+
+/home/mcrae/Code/hermes/target/rls/thumbv7em-none-eabihf/debug/deps/cortex_m_semihosting-d16fc0ff866a87e2.d: /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/lib.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/macros.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/debug.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/export.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/hio.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/nr.rs
+
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/lib.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/macros.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/debug.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/export.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/hio.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-semihosting-0.3.7/src/nr.rs:

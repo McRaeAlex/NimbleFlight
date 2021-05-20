@@ -19,6 +19,8 @@ Groundstation: Node + TypeScript + https://github.github.io/catalyst/
 
 Notes: Rocketbook
 
+Frame: https://www.thingiverse.com/thing:4786123 (this is just a cool frame, I will likely have to diy one)
+
 ## MVP
 
 * Control Motors

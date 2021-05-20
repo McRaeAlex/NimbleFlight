@@ -1,0 +1,13 @@
+/home/mcrae/Code/hermes/target/rls/thumbv7em-none-eabihf/debug/deps/cortex_m-75ec4e1246590125.rmeta: /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/lib.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/macros.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/itm.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/mod.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/cbp.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/mpu.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/nvic.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/scb.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/register/mod.rs
+
+/home/mcrae/Code/hermes/target/rls/thumbv7em-none-eabihf/debug/deps/cortex_m-75ec4e1246590125.d: /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/lib.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/macros.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/itm.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/mod.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/cbp.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/mpu.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/nvic.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/scb.rs /home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/register/mod.rs
+
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/lib.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/macros.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/itm.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/mod.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/cbp.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/mpu.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/nvic.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/peripheral/scb.rs:
+/home/mcrae/.cargo/registry/src/github.com-1ecc6299db9ec823/cortex-m-0.6.7/src/register/mod.rs:
