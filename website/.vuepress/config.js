@@ -19,6 +19,6 @@ const themeConfig = {
 module.exports = {
     title: "NimbleFlight",
     description: "Flight controller software",
-    base: "/nimbleflight/",
+    base: "/NimbleFlight/",
     themeConfig,
 }
