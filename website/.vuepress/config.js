@@ -18,7 +18,7 @@ const themeConfig = {
 
 module.exports = {
     title: "NimbleFlight",
-    description: "Flight controller software",
+    description: "A new flight controller software built with Rust with modern abstractions",
     base: "/NimbleFlight/",
     themeConfig,
 }
