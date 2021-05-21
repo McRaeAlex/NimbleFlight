@@ -1,12 +1,14 @@
-# The onboard sensors
+# Day 2 - The onboard sensors
 
 The goal of today is to get the onboard sensors working and sending the data over serial
+
+[[toc]]
 
 ## L3GD20
 
 Okay, I spent 3 days trying to get this to work, first learning SPI, which is a rather simple and nice protocol, going through the datasheets of my board, the 2 potential onboard sensors and drivers written for the sensor. I kept retrieving garbage values from the bus, until... I realized I had mistyped the chip select pin, yea that pin that activated the SPI communication, wrong.
 
-![AHh](./resource/spongebob_dispare.jpg)
+![AHh](/spongebob_dispare.jpg)
 
 ### How to do it
 
@@ -42,5 +44,5 @@ This part of the project took me 6 days to complete, of which I spent about an h
 
 ## Scratch notes
 
-<iframe src="./resources/day2.pdf" width="100%" height="800px">
+<iframe src="/day2.pdf" width="100%" height="800px">
 </iframe>

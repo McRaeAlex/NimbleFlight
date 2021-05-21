@@ -1,4 +1,4 @@
-# Recieving input from a controller
+# Day 3 - Recieving input from a controller
 
 ## Links
 

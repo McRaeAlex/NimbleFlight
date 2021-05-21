@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Overview | NimbleFlight</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Flight controller software">
+    
+    <link rel="preload" href="/nimbleflight/assets/css/0.styles.2d154052.css" as="style"><link rel="preload" href="/nimbleflight/assets/js/app.a8020cce.js" as="script"><link rel="preload" href="/nimbleflight/assets/js/2.0475dad8.js" as="script"><link rel="preload" href="/nimbleflight/assets/js/11.2bb42653.js" as="script"><link rel="prefetch" href="/nimbleflight/assets/js/10.c6354be0.js"><link rel="prefetch" href="/nimbleflight/assets/js/12.067499ce.js"><link rel="prefetch" href="/nimbleflight/assets/js/13.0337e152.js"><link rel="prefetch" href="/nimbleflight/assets/js/3.3d510161.js"><link rel="prefetch" href="/nimbleflight/assets/js/4.e7c996f5.js"><link rel="prefetch" href="/nimbleflight/assets/js/5.6eff8140.js"><link rel="prefetch" href="/nimbleflight/assets/js/6.17d5dd20.js"><link rel="prefetch" href="/nimbleflight/assets/js/7.d8911d31.js"><link rel="prefetch" href="/nimbleflight/assets/js/8.2e59a768.js"><link rel="prefetch" href="/nimbleflight/assets/js/9.646a9ea1.js">
+    <link rel="stylesheet" href="/nimbleflight/assets/css/0.styles.2d154052.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/nimbleflight/" class="home-link router-link-active"><!----> <span class="site-name">NimbleFlight</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/nimbleflight/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/nimbleflight/docs/" class="nav-link">
+  Docs
+</a></div><div class="nav-item"><a href="/nimbleflight/blog/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Blog
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/nimbleflight/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/nimbleflight/docs/" class="nav-link">
+  Docs
+</a></div><div class="nav-item"><a href="/nimbleflight/blog/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  Blog
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/nimbleflight/blog/" aria-current="page" class="active sidebar-link">Overview</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/nimbleflight/blog/#blog-entries" class="sidebar-link">Blog Entries</a></li><li class="sidebar-sub-header"><a href="/nimbleflight/blog/#the-stack" class="sidebar-link">The stack</a></li></ul></li><li><a href="/nimbleflight/blog/day0.html" class="sidebar-link">Day 0 - The groundstation, discovery book, and teensy</a></li><li><a href="/nimbleflight/blog/day1.html" class="sidebar-link">Day 1 - Getting some form of logging working</a></li><li><a href="/nimbleflight/blog/day2.html" class="sidebar-link">Day 2 - The onboard sensors</a></li><li><a href="/nimbleflight/blog/day3.html" class="sidebar-link">Day 3 - Recieving input from a controller</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="overview"><a href="#overview" class="header-anchor">#</a> Overview</h1> <p>This drone project is my attempt at really learning embedded programming.</p> <p>Each &quot;day&quot; I work on the project I will create a blog entry about it. A day in this context is basically just a group of tasks which I initially think I can complete in a day but end up completing in multiple. 👌</p> <p><strong>It should be noted, this blog is not meant for anyones eyes but my own! It's not meant to be a good read, or informative, just keep me motivated to keep going. The documentation section will be the place for information</strong></p> <h2 id="blog-entries"><a href="#blog-entries" class="header-anchor">#</a> Blog Entries</h2> <p><a href="./day0">day0 - Inital groundstation setup and design</a><br> <a href="./day1">day1 - Outputing data over the USB</a><br> <a href="./day2">day2 - Getting the sensor data and hooking it up to the groundstation</a><br> <a href="./day3">day3 - Recieving data from the handheld controller</a></p> <h2 id="the-stack"><a href="#the-stack" class="header-anchor">#</a> The stack</h2> <p>For the drone flight controller I am using a stm32f3 discovery board, which the rust <a href="https://docs.rust-embedded.org/discovery/" target="_blank" rel="noopener noreferrer">discovery book<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> is based on.</p> <p>I will be using the built in gyroscope, accelerometer, and other on board sensors.</p> <p>For the electronic speed controller I will be using <strong>idk</strong> yet.</p> <p>For the motors I will be using <strong>idk</strong> yet.</p> <p>The groundstation is written in javascript (node on the backend, vanilla on the frontend)</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/nimbleflight/blog/day0.html">
+        Day 0 - The groundstation, discovery book, and teensy
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/nimbleflight/assets/js/app.a8020cce.js" defer></script><script src="/nimbleflight/assets/js/2.0475dad8.js" defer></script><script src="/nimbleflight/assets/js/11.2bb42653.js" defer></script>
+  </body>
+</html>

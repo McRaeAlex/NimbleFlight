@@ -1,12 +1,14 @@
-# The groundstation, discovery book, and teensy
+# Day 0 - The groundstation, discovery book, and teensy
 
 Day0 is sort of odd, because I started this project while studying for exams and finishing final projects, basically instead of taking a netflix break I would just work on the groundstation in js. Due to this, there wasn't really a defined goal but mainly me just messing around doing whatever I could in an hour or so here or there.
+
+[[toc]]
 
 ## The groundstation
 
 Most of the time I spent doing JS stuff on the ground station. To begin I came up with its functionality, based on both what i wanted and other industry grade solutions, then came up with the basic layout and GUI of the system.
 
-![groundstation sketch](./resources/groundstation_sketch.jpg "Groundstation sketch")
+![groundstation sketch](/groundstation_sketch.jpg "Groundstation sketch")
 
 As you can probably tell I am not an artist but it lays out what it should look like and gives a key overview for the different functionality.
 
@@ -44,7 +46,7 @@ I initally started out thinking I would use React, Vue or Svelte but quickly rea
 
 The current solution looks like this
 
-![day0 groundstation](./resources/groundstation_day0.png)
+![day0 groundstation](/groundstation_day0.png)
 
 As you can see it looks pretty similar to the sketch with some minor changes. First I added a compass to the orientation viewer to better understand where the drone is looking, also the ordering of the widgets are different. This is because in the future I am going to allow the user to drag, drop and resize them to fit their need.
 

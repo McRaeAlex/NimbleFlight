@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Day 1 - Getting some form of logging working | NimbleFlight</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    
+    <meta name="description" content="Flight controller software">
+    
+    <link rel="preload" href="/nimbleflight/assets/css/0.styles.2d154052.css" as="style"><link rel="preload" href="/nimbleflight/assets/js/app.a8020cce.js" as="script"><link rel="preload" href="/nimbleflight/assets/js/2.0475dad8.js" as="script"><link rel="preload" href="/nimbleflight/assets/js/8.2e59a768.js" as="script"><link rel="prefetch" href="/nimbleflight/assets/js/10.c6354be0.js"><link rel="prefetch" href="/nimbleflight/assets/js/11.2bb42653.js"><link rel="prefetch" href="/nimbleflight/assets/js/12.067499ce.js"><link rel="prefetch" href="/nimbleflight/assets/js/13.0337e152.js"><link rel="prefetch" href="/nimbleflight/assets/js/3.3d510161.js"><link rel="prefetch" href="/nimbleflight/assets/js/4.e7c996f5.js"><link rel="prefetch" href="/nimbleflight/assets/js/5.6eff8140.js"><link rel="prefetch" href="/nimbleflight/assets/js/6.17d5dd20.js"><link rel="prefetch" href="/nimbleflight/assets/js/7.d8911d31.js"><link rel="prefetch" href="/nimbleflight/assets/js/9.646a9ea1.js">
+    <link rel="stylesheet" href="/nimbleflight/assets/css/0.styles.2d154052.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/nimbleflight/" class="home-link router-link-active"><!----> <span class="site-name">NimbleFlight</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/nimbleflight/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/nimbleflight/docs/" class="nav-link">
+  Docs
+</a></div><div class="nav-item"><a href="/nimbleflight/blog/" class="nav-link router-link-active">
+  Blog
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/nimbleflight/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/nimbleflight/docs/" class="nav-link">
+  Docs
+</a></div><div class="nav-item"><a href="/nimbleflight/blog/" class="nav-link router-link-active">
+  Blog
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><a href="/nimbleflight/blog/" aria-current="page" class="sidebar-link">Overview</a></li><li><a href="/nimbleflight/blog/day0.html" class="sidebar-link">Day 0 - The groundstation, discovery book, and teensy</a></li><li><a href="/nimbleflight/blog/day1.html" aria-current="page" class="active sidebar-link">Day 1 - Getting some form of logging working</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/nimbleflight/blog/day1.html#step-1-getting-the-logging-working" class="sidebar-link">Step 1 - Getting the logging working</a></li></ul></li><li><a href="/nimbleflight/blog/day2.html" class="sidebar-link">Day 2 - The onboard sensors</a></li><li><a href="/nimbleflight/blog/day3.html" class="sidebar-link">Day 3 - Recieving input from a controller</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="day-1-getting-some-form-of-logging-working"><a href="#day-1-getting-some-form-of-logging-working" class="header-anchor">#</a> Day 1 - Getting some form of logging working</h1> <p>Alright, now that I am mostly done with school I can starting working on this project until I start school again in 2 weeks.</p> <p><strong>The goal is to get the logging through the USB cable to my computer</strong></p> <h2 id="step-1-getting-the-logging-working"><a href="#step-1-getting-the-logging-working" class="header-anchor">#</a> Step 1 - Getting the logging working</h2> <p>As I mentioned in the last post, I have a rather odd hack to get logging on the STM board. I connect the teensy 4.0 to the usb cable and have it forward UART packets to the computer. Yikes. Let's fix that.</p> <p>Here is an image of the set up right now.</p> <p><img src="/day0_logging_hack.jpg" alt="day0 logging hack"></p> <p>So I not only dug into the datasheet to attempt to figure this out but also took the st USB training online course (it's free on youtube). Originally I thought I was going to implement USB from scratch, but like normal I have been humbled by the insanity of low level programming. I think I could do it if I had enough time but again the result is the <strong>drone</strong>.</p> <p><img src="/3_hours_later.gif" alt="3 hours later"></p> <p><strong>AAAAAAHHHHHHHHHHHHHH</strong></p> <p>So it turns out, that hack I wrote about isn't a hack at all. It turns out USB is hard and using UART to USB modules is extremely common, all I did was turn a teensy into that module. It also turns out, my board has one built it... so approximated 7 hours later, with a better understanding of USB, I will be erasing all the code I wrote and replacing it with the code I had at the beginning of the day, just a different UART.</p> <p><strong>note to self: this trick only works because I have the stlinkv2.1 B and the discovery board revC so if I create my own board I will have to add the module manually or something</strong></p> <p>The new code works as I expect and it this entire journey only took 1 day. Now I can move on to getting the on board sensors to work and log the values.</p> <div class="language- extra-class"><pre class="language-text"><code>insert code for the logging
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/nimbleflight/blog/day0.html" class="prev">
+        Day 0 - The groundstation, discovery book, and teensy
+      </a></span> <span class="next"><a href="/nimbleflight/blog/day2.html">
+        Day 2 - The onboard sensors
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/nimbleflight/assets/js/app.a8020cce.js" defer></script><script src="/nimbleflight/assets/js/2.0475dad8.js" defer></script><script src="/nimbleflight/assets/js/8.2e59a768.js" defer></script>
+  </body>
+</html>

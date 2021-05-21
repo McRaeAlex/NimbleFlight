@@ -1,4 +1,4 @@
-# Getting some form of logging working
+# Day 1 - Getting some form of logging working
 
 Alright, now that I am mostly done with school I can starting working on this project until I start school again in 2 weeks.
 
@@ -10,11 +10,11 @@ As I mentioned in the last post, I have a rather odd hack to get logging on the 
 
 Here is an image of the set up right now.
 
-![day0 logging hack](./resources/day0_logging_hack.jpg)
+![day0 logging hack](/day0_logging_hack.jpg)
 
 So I not only dug into the datasheet to attempt to figure this out but also took the st USB training online course (it's free on youtube). Originally I thought I was going to implement USB from scratch, but like normal I have been humbled by the insanity of low level programming. I think I could do it if I had enough time but again the result is the **drone**.
 
-![3 hours later](./resources/3_hours_later.gif)
+![3 hours later](/3_hours_later.gif)
 
 **AAAAAAHHHHHHHHHHHHHH** 
 
