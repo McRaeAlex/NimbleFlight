@@ -1,4 +1,5 @@
 const themeConfig = {
+    logo: '/logo_drone.svg',
     nav: [
         { text: 'Home', link: '/' },
         { text: 'Docs', link: '/docs/' },
